@@ -22,7 +22,7 @@ jobs:
   release:
     name: Publish and Create Release
     # if: startsWith(github.ref, 'refs/tags/')
-    needs: build
+    # needs: build
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
