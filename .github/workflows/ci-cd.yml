@@ -32,12 +32,12 @@ jobs:
             rid: win-x64
             archive: 
               type: zip
-              name: windows.zip
+              name: win-64.zip
           - os: ubuntu-latest
             rid: linux-x64
             archive: 
-              type: tar
-              name: linux.tar.gz
+              type: zip
+              name: linux-64.zip
     steps:
       - name: Checkout
         uses: actions/checkout@v2
