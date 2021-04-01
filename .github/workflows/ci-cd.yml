@@ -46,7 +46,7 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Publish
-        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish - r ${{ matrix.rid }}
+        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
       - name: Create packed folder
         uses: thedoctor0/zip-release@master
         with:
