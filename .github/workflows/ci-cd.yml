@@ -27,6 +27,17 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
+        include:
+          - os: windows-latest
+            rid: win-x64
+            archive: 
+              type: zip
+              name: windows.zip
+          - os: ubuntu-latest
+            rid: linux-x64
+            archive: 
+              type: tar
+              name: linux.tar.gz
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -35,15 +46,16 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Publish
-        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish
+        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish - r ${{ matrix.rid }}
       - name: Create packed folder
         uses: thedoctor0/zip-release@master
         with:
-          filename: release.zip
+          filename: ${{ matix.archive.name }}
           directory: publish/
+          type: ${{ matix.archive.type }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: release.zip
+          files: ${{ matix.archive.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
