@@ -47,12 +47,12 @@ jobs:
           dotnet-version: 5.0.x
       - name: Publish
         run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
-      # - name: Create packed folder
-      #   uses: thedoctor0/zip-release@master
-      #   with:
-      #     filename: ${{ matrix.archive.name }}
-      #     directory: publish/
-      #     type: ${{ matrix.archive.type }}
+      - name: Create packed folder
+        uses: thedoctor0/zip-release@master
+        with:
+          filename: ${{ matrix.archive.name }}
+          directory: publish/
+          type: ${{ matrix.archive.type }}
       # - name: Create Release
       #   uses: softprops/action-gh-release@v1
       #   with:
