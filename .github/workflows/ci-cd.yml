@@ -50,12 +50,12 @@ jobs:
       - name: Create packed folder
         uses: thedoctor0/zip-release@master
         with:
-          filename: ${{ matix.archive.name }}
+          filename: ${{ matrix.archive.name }}
           directory: publish/
-          type: ${{ matix.archive.type }}
+          type: ${{ matrix.archive.type }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
-          files: ${{ matix.archive.name }}
+          files: ${{ matrix.archive.name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
