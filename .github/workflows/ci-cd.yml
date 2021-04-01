@@ -2,10 +2,6 @@ name: CI-CD
 
 on: push
 
-defaults:
-  run:
-    working-directtory: src/Cli
-
 jobs:
   build:
     runs-on: ubuntu-ubuntu-latest
