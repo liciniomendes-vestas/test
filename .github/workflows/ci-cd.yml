@@ -21,6 +21,7 @@ jobs:
       - name: Publish
         run: dotnet publish -c Release --self-contained --no-restore --no-build --nologo -p:PublishTrimmed=true --output publish
       - name: Release
+        uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
         working-directory: publish/
         with:
