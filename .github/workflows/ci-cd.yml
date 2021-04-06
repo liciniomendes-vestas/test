@@ -2,6 +2,10 @@ name: CI-CD
 
 on: push
 
+defaults:
+  run:
+    working-directory: src/Cli
+
 jobs:
   # build:
   #   name: Build and Test
