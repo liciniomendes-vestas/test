@@ -59,8 +59,8 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      # - name: Checkout
-      #   uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       # - name: Installing SDK .NET
       #   uses: actions/setup-dotnet@v1
       #   with:
