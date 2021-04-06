@@ -2,6 +2,10 @@ name: CI-CD
 
 on: push
 
+defaults:
+  run:
+    working-directory: src/Cli
+
 jobs:
   # build:
   #   name: Build and Test
@@ -35,6 +39,10 @@ jobs:
             rid: linux-x64
             archive: linux-x64
     steps:
+      - name: Github Context
+        env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Checkout
         uses: actions/checkout@v2
       - name: Installing SDK .NET
@@ -42,12 +50,16 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Publish
-        run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
+        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
       - name: Pack artifacts
         uses: papeloto/action-zip@v1
         with:
           dest: ${{ matrix.archive }}.zip
           files: publish/
+        env:
+          ZIP_CONTEXT: ${{ toJSON(github) }}
+      - name: Dump Zip Context
+        run: echo "$ZIP_CONTEXT"      
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
