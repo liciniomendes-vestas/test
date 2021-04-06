@@ -39,6 +39,8 @@ jobs:
             rid: linux-x64
             archive: linux-x64
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Github Context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
@@ -63,8 +65,6 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - name: Checkout
-        uses: actions/checkout@v2
       # - name: Installing SDK .NET
       #   uses: actions/setup-dotnet@v1
       #   with:
