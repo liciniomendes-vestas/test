@@ -59,24 +59,24 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Installing SDK .NET
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: 5.0.x
-      - name: Publish
-        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
-      - name: Pack artifacts
-        uses: papeloto/action-zip@v1
-        with:
-          dest: ${{ matrix.archive }}.zip
-          files: publish/
-      - name: Dump Zip Context
-        run: echo "$ZIP_CONTEXT"      
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: ${{ matrix.archive }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Checkout
+      #   uses: actions/checkout@v2
+      # - name: Installing SDK .NET
+      #   uses: actions/setup-dotnet@v1
+      #   with:
+      #     dotnet-version: 5.0.x
+      # - name: Publish
+      #   run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
+      # - name: Pack artifacts
+      #   uses: papeloto/action-zip@v1
+      #   with:
+      #     dest: ${{ matrix.archive }}.zip
+      #     files: publish/
+      # - name: Dump Zip Context
+      #   run: echo "$ZIP_CONTEXT"      
+      # - name: Create Release
+      #   uses: softprops/action-gh-release@v1
+      #   with:
+      #     files: ${{ matrix.archive }}.zip
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
