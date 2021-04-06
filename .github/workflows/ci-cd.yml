@@ -41,6 +41,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Installing SDK .NET
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
       - name: Github Context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
@@ -65,10 +69,7 @@ jobs:
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
         run: echo "$MATRIX_CONTEXT"
-      # - name: Installing SDK .NET
-      #   uses: actions/setup-dotnet@v1
-      #   with:
-      #     dotnet-version: 5.0.x
+      
       # - name: Publish
       #   run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
       # - name: Pack artifacts
