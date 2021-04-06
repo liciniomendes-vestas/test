@@ -2,10 +2,6 @@ name: CI-CD
 
 on: push
 
-defaults:
-  run:
-    working-directory: src/Cli
-
 jobs:
   # build:
   #   name: Build and Test
@@ -46,7 +42,7 @@ jobs:
         with:
           dotnet-version: 5.0.x
       - name: Publish
-        run: dotnet publish -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
+        run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
       - name: Pack artifacts
         uses: papeloto/action-zip@v1
         with:
