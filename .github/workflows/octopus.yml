@@ -1,0 +1,17 @@
+name: "Push release to Octopus"
+
+on:
+  workflow_dispatch:
+  release:
+    types: 
+      - published
+
+jobs:
+  publish:
+    #runs-on: self-hosted
+    steps:
+      - name: Show data
+        run: |
+          echo "${{ toJson(github) }}"
+          echo "----"
+          echo "${{ toJson(release) }}"
