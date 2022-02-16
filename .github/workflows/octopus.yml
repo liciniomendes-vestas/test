@@ -3,8 +3,8 @@ name: "Push release to Octopus"
 on:
   workflow_dispatch:
   release:
-    types: 
-      - published
+    #types: 
+    #  - published
 
 jobs:  
   publish:
