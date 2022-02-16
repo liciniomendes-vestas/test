@@ -6,12 +6,12 @@ on:
     types: 
       - published
 
-jobs:
+jobs:  
   publish:
+    runs-on: ubuntu-latest
     #runs-on: self-hosted
     steps:
       - name: Show data
         run: |
           echo "${{ toJson(github) }}"
           echo "----"
-          echo "${{ toJson(release) }}"
