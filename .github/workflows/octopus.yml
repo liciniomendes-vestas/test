@@ -12,7 +12,7 @@ jobs:
           echo "${{ toJson(github) }}"
           echo "----"
       - name: Get the version
-        run: echo "TAG=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+        run: echo "TAG=${GITHUB_REF/refs\/tags\/}" >> $GITHUB_ENV
       - uses: robinraju/release-downloader@v1.3
         with:
           repository: "vestas-power-solutions/test"
