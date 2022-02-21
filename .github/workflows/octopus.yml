@@ -2,12 +2,6 @@ name: "Push release to Octopus"
 
 on:
   workflow_dispatch:
-  release:
-    types: 
-      - published
-      - created
-      - released
-
 jobs:  
   publish:
     runs-on: ubuntu-latest
@@ -17,3 +11,10 @@ jobs:
         run: |
           echo "${{ toJson(github) }}"
           echo "----"
+      - name: Get the version
+        run: echo "TAG=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      - uses: robinraju/release-downloader@v1.3
+        with:
+          repository: "vestas-power-solutions/test"
+          tag: "${{env.TAG}}"
+          fileName: "*"
