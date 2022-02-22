@@ -2,6 +2,8 @@ name: CI-CD
 
 on: push
 
+env:
+  APPLICATION_NAME: mysuperapp
 jobs:
   # build:
   #   name: Build and Test
@@ -43,10 +45,12 @@ jobs:
           dotnet-version: 5.0.x
       - name: Publish
         run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
+      - name: Create filename
+        run: echo "FILENAME=${{env.APPLICATION_NAME}}.${ matrix.rid }.zip" >> $GITHUB_ENV
       - name: Pack artifacts
         uses: papeloto/action-zip@v1
         with:
-          dest: ${{ matrix.archive }}.zip
+          dest: ${{ env.FILENAME }}
           files: publish/
       - name: Github Context
         env:
@@ -71,10 +75,28 @@ jobs:
       - name: Dump matrix context
         env:
           MATRIX_CONTEXT: ${{ toJSON(matrix) }}
-        run: echo "$MATRIX_CONTEXT"      
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
+        run: echo "$MATRIX_CONTEXT"  
+      - name: Upload artifcat
+        uses: actions/upload-artifact@v2
         with:
-          files: ${{ matrix.archive }}.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          name: ${{ env.FILENAME }}
+          path: .
+      #- name: Create Release
+      #  uses: softprops/action-gh-release@v1
+      #  with:
+      #    files: ${{ matrix.archive }}.zip
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  publish:
+    name: Publish releases to github
+    runs-on: self-hosted
+    needs: 
+      - release
+    steps:
+      - name: Download a single artifact
+        uses: actions/download-artifact@v2
+      - name: Display structure of downloaded files
+        run: ls -R
+    
+    
+    
