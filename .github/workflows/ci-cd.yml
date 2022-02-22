@@ -89,7 +89,7 @@ jobs:
       #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   publish:
     name: Publish releases to github
-    runs-on: self-hosted
+    runs-on: macos-latest
     needs: 
       - release
     steps:
