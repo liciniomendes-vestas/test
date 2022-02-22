@@ -45,12 +45,10 @@ jobs:
           dotnet-version: 5.0.x
       - name: Publish
         run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
-      - name: Create filename
-        run: echo "FILENAME_ARTIFACT=${{ env.APPLICATION_NAME }}.${{ matrix.rid }}.zip" >> $GITHUB_ENV
       - name: Pack artifacts
         uses: papeloto/action-zip@v1
         with:
-          dest: ${{ env.FILENAME_ARTIFACT }}
+          dest: ${{ env.APPLICATION_NAME }}.${{ matrix.rid }}.zip
           files: publish/
       - name: Github Context
         env:
@@ -80,7 +78,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: XYZ
-          path: ${{ env.FILENAME_ARTIFACT }}
+          path: ${{ env.APPLICATION_NAME }}.${{ matrix.rid }}.zip
       #- name: Create Release
       #  uses: softprops/action-gh-release@v1
       #  with:
@@ -95,6 +93,8 @@ jobs:
     steps:
       - name: Download a single artifact
         uses: actions/download-artifact@v2
+        with:
+          name: XYZ
       - name: Display structure of downloaded files
         run: ls -R
     
