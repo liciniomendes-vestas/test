@@ -46,7 +46,7 @@ jobs:
       - name: Publish
         run: dotnet publish src/Cli -c Release --self-contained --nologo -p:PublishTrimmed=true --output publish -r ${{ matrix.rid }}
       - name: Create filename
-        run: echo "FILENAME=${{ env.APPLICATION_NAME }}.${{ matrix.rid }}.zip" >> $GITHUB_ENV
+        run: echo "FILENAME_${{ matrix.rid }}=${{ env.APPLICATION_NAME }}.${{ matrix.rid }}.zip" >> $GITHUB_ENV
       - name: Pack artifacts
         uses: papeloto/action-zip@v1
         with:
@@ -79,7 +79,7 @@ jobs:
       - name: Upload artifcat
         uses: actions/upload-artifact@v2
         with:
-          name: ${ env.FILENAME }
+          name: ${{ env.FILENAME_${{ matrix.rid }} }}
           path: .
       #- name: Create Release
       #  uses: softprops/action-gh-release@v1
