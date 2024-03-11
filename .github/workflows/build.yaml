@@ -41,7 +41,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5.3.0
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/domaina
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}g
           tags: |
             type=edge,branch=master
             type=sha
