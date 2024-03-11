@@ -54,7 +54,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.1.0
         with:
-          context: src/DomainA/DomainA.Api
+          context: src/DomainA
           file: src/DomainA/DomainA.Api/Dockerfile
           push: true
           tags: ${{ steps.meta.outputs.tags }}
