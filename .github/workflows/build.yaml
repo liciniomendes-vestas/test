@@ -24,3 +24,14 @@ jobs:
 
       - name: Build
         run: dotnet build --no-restore
+  build-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5.1.0
+        with:
+          context: src/DomainA/DomainA.Api
+          file: src/DomainA/DomainA.Api/Dockerfile
+          push: false
