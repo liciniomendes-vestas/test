@@ -29,6 +29,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Default context
+        run: echo "{{defaultContext}}"
       - name: Build and push Docker image
         uses: docker/build-push-action@v5.1.0
         with:
