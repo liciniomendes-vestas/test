@@ -32,7 +32,8 @@ jobs:
       id: meta
       uses: docker/metadata-action@v5.3.0
       with:
-        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ inputs.name_suffix }}
+        images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}-${{ inputs.name_suffix }}
+        #images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ inputs.name_suffix }}
         tags: |
           type=edge,branch=master
           type=sha
