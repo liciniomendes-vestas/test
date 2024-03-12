@@ -22,7 +22,7 @@ jobs:
     uses: ./.github/workflows/build-c.yaml
     with:
       dockerfile_context: src/DomainA
-      dockerfile_path: src/DomainA/DomainA.Api/Dockerfile
+      dockerfile_path: src/Domaina/DomainA.Api/Dockerfile
       name_suffix: domaina-api
     # runs-on: ubuntu-latest
     # needs: build
