@@ -32,10 +32,11 @@ jobs:
     secrets: inherit
 
   deploy-01-dev:
-    name: Deploy to dev
+    name: Deploy to Development
     needs: 
       - web
     runs-on: ubuntu-latest
+    environment: development
     steps:
       - run: "echo dev"
 
@@ -44,6 +45,7 @@ jobs:
     needs: 
       - web
     runs-on: ubuntu-latest
+    environment: staging
     steps:
       - run: "echo stg"
 
@@ -52,5 +54,6 @@ jobs:
     needs: 
       - web
     runs-on: ubuntu-latest
+    environment: production
     steps:
       - run: "echo prd"
