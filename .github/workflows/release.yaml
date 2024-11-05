@@ -52,7 +52,7 @@ jobs:
   deploy-03-prd:
     name: Deploy to Production
     needs: 
-      - web
+      - deploy-02-stg
     runs-on: ubuntu-latest
     environment: production
     steps:
