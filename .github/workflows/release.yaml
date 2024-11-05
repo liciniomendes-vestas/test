@@ -1,0 +1,56 @@
+﻿name: Image Builds
+
+on:
+  workflow_dispatch:
+  push:
+    branches: 
+      - master
+    tags: 
+      - '*'
+    paths:
+      - 'src/**'
+  pull_request:
+    paths:
+      - 'src/**'
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build-and-test:
+    name: Verifying build
+    uses: ./.github/workflows/build.yaml
+  web:
+    name: Web
+    needs: build-and-test
+    uses: ./.github/workflows/container-action.yaml
+    with:
+      dockerfile_context: "src/"
+      dockerfile_path: src/web/Dockerfile
+      name_suffix: bo
+    secrets: inherit
+
+  deploy-01-dev:
+    name: Deploy to dev
+    needs: 
+      - web
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo dev"
+
+  deploy-02-stg:
+    name: Deploy to Staging
+    needs: 
+      - web
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo stg"
+
+  deploy-03-prd:
+    name: Deploy to Production
+    needs: 
+      - web
+    runs-on: ubuntu-latest
+    steps:
+      - run: "echo prd"
