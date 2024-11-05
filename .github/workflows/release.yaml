@@ -43,7 +43,7 @@ jobs:
   deploy-02-stg:
     name: Deploy to Staging
     needs: 
-      - web
+      - deploy-01-dev
     runs-on: ubuntu-latest
     environment: staging
     steps:
