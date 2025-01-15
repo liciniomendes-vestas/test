@@ -16,7 +16,7 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: web
-  TAG_PREFIX: backoffice/
+  TAG_PREFIX: 'backoffice/'
 
 jobs:
   build-and-test:
