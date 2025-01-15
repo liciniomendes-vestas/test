@@ -48,7 +48,7 @@ jobs:
       - name: Set IMAGE_TAG
         run: |
           TAG_NAME=${GITHUB_REF#refs/tags/}
-          IMAGE_TAG=$(echo $TAG_NAME) | sed -E 's/backoffice\/(.*)/\1/')
+          IMAGE_TAG=$(echo $TAG_NAME | sed -E 's/backoffice\/(.*)/\1/')
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
       - run: echo ${{ env.IMAGE_TAG }}
       - run: "echo dev"
