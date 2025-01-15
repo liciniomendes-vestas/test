@@ -16,7 +16,6 @@ on:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: web
-  TAG_PREFIX: 'backoffice/'
 
 jobs:
   build-and-test:
@@ -30,6 +29,7 @@ jobs:
       dockerfile_context: src/web
       dockerfile_path: src/web/Dockerfile
       name_suffix: bo
+      tag_prefix: backoffice/
     secrets: inherit
 
   deploy-01-dev:
