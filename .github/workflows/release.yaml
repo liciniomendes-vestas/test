@@ -41,13 +41,13 @@ jobs:
     steps:
       - name: Validate if we are running a tag
         run: |
-          if [[ "${ GITHUB_REF} " != refs/tags/* ]]; then
+          if [[ "${GITHUB_REF}" != refs/tags/* ]]; then
             echo "We need a tag to ensure we are deploying working services. Aborting workflow..."
             exit 1
           fi
       - name: Set IMAGE_TAG
         run: |
-          TAG_NAME=${ GITHUB_REF#refs/tags/ }
+          TAG_NAME=${GITHUB_REF#refs/tags/}
           IMAGE_TAG=$(echo $TAG_NAME) | sed -E 's/backoffice\/(.*)/\1/')
           echo "IMAGE_TAG=$IMAGE_TAG" >> $GITHUB_ENV
       - run: echo ${{ env.IMAGE_TAG }}
