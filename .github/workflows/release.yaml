@@ -42,7 +42,7 @@ jobs:
       - name: Validate if we are running a tag
         run: |
           if [[ "${GITHUB_REF}" != refs/tags/* ]]; then
-            echo "We need a tag to ensure we are deploying working services. Aborting workflow..."
+            echo "::error::We need a tag to ensure we are deploying working services. Aborting workflow..."
             exit 1
           fi
       - name: Set IMAGE_TAG
