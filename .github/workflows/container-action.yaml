@@ -40,7 +40,7 @@ jobs:
       with:
         images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/${{ inputs.name_suffix }}
         tags: |
-          type=match,pattern=${{ input.tag_prefix }}(.*),group=1
+          type=match,pattern=${{ inputs.tag_prefix }}(.*),group=1
           type=edge,branch=master
           type=sha
           type=ref,event=tag
