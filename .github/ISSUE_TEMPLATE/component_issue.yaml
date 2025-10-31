@@ -29,7 +29,7 @@ body:
         - label: engine
         - label: directory
         
-- type: checkboxes
+  - type: checkboxes
     id: edge
     attributes:
       label: Affected Subcomponents Edge
