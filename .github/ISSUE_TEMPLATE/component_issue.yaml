@@ -18,7 +18,7 @@ body:
         - infra
         - shared-db
         - other
-      default: other
+      default: 5  # Index of "other" (starts at 0)
 
   - type: textarea
     id: description
