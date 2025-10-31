@@ -1,4 +1,4 @@
-
+---
 name: Component Issue
 description: Report an issue related to a specific service/component
 title: "[Component] <short description>"
@@ -26,3 +26,4 @@ body:
       label: Issue Description
       description: Describe the problem or request in detail.
       placeholder: Describe what’s happening, expected behavior, and any relevant context.
+---
