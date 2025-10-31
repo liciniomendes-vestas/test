@@ -20,6 +20,24 @@ body:
         - other
       default: 5  # Index of "other" (starts at 0)
 
+  - type: checkboxes
+    id: backoffice
+    attributes:
+      label: Affected Subcomponents
+      description: Select all subcomponents involved in this issue.
+      options:
+        - label: engine
+        - label: directory
+        
+- type: checkboxes
+    id: edge
+    attributes:
+      label: Affected Subcomponents Edge
+      description: Select all subcomponents involved in this issue.
+      options:
+        - label: poller
+        - label: observability
+        
   - type: textarea
     id: description
     attributes:
